@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@layer components{
+  .bg-grid {
+      background-color: #FFF;
+
+      background-image:
+        linear-gradient(
+          to right,
+          rgba(49,56,96,0.09) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(49, 56, 96, 0.09) 1px,
+          transparent 1px
+        );
+
+      background-size: 26px 26px;
+    }
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width:100%;
+    padding:16px 12px 0px 12px;
+  }
+}
+
+@layer base {
+  body {
+    font-family: var(--font-inter);
+    color: var(--color-foreground);
+    background: var(--color-background);
+    @apply bg-background text-foreground;
+  }
+
+  h1 {
+    font-family: var(--font-inter);
+    font-size: 3rem;
+    line-height: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    font-family: var(--font-inter);
+    font-size: 2.25rem;
+    line-height: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  h3 {
+    font-family: var(--font-inter);
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+  }
+
+  h4 {
+    font-family: var(--font-inter);
+    font-size: 1.375rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-family: var(--font-inter);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font-family: var(--font-inter);
+  }
+
+  code,
+  pre {
+    font-family: var(--font-jetbrains)
+  }
+
+  label{
+    font-family:var(--font-jetbrains);
+  }
+  * {
+    @apply border-border outline-ring/50;
+
+  }
+  html {
+    @apply font-sans;
+
+  }
+}
