@@ -14,7 +14,6 @@ import EnfLogo from "@/components/logos/EnfLogo";
 import LogoLayout from "../components/logos/Logo";
 import SignInPage from "./(public)/auth/sign-in/page";
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
 import SignUpPage from "./(public)/auth/sign-up/page";
 import TermsOfService from "../components/legal/TermsOfServices";
 import PrivacyPolicies from "../components/legal/PrivacyPolicies";
@@ -61,7 +60,7 @@ export default function Home() {
 
         <div
           id="signin-box"
-          className="border  border-b-gray-300  bg-white gap-8 px-8 py-8 rounded-md w-[500px] h-[600px]"
+          className="border  border-b-gray-300  bg-white gap-8 px-8 py-8 rounded-md w-125 h-150"
         >
           <Tabs defaultValue="login" className="w-full">
             <TabsList className="w-full rounded-sm">

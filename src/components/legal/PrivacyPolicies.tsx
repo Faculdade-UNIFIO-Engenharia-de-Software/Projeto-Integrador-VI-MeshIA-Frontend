@@ -32,7 +32,7 @@ export default function TermsOfService() {
                   Última atualização: 29 de setembro de 2026
                 </p>
                 <p className="mb-4 text-justify">
-                  A <strong>MeshIA Inteligência de Negócios LTDA</strong> ("Nós", "Empresa" ou "Plataforma"), inscrita no CNPJ sob o nº 00.000.000/0001-11, operadora da plataforma <EnfLogo/>, valoriza a privacidade e a segurança dos dados de seus usuários ("Você", "Usuário" ou "Cliente").
+                  A <strong>MeshIA Inteligência de Negócios LTDA</strong> (&quot;Nós&quot;, &quot;Empresa&quot; ou &quot;Plataforma&quot;), inscrita no CNPJ sob o nº 00.000.000/0001-11, operadora da plataforma <EnfLogo/>, valoriza a privacidade e a segurança dos dados de seus usuários (&quot;Você&quot;, &quot;Usuário&quot; ou &quot;Cliente&quot;).
                 </p>
                 <p className="mb-4 text-justify">
                   Esta Política de Privacidade descreve como coletamos, usamos, armazenamos, processamos e protegemos as informações e dados pessoais quando você utiliza nossa plataforma de agentes e chatbots baseados em <strong>RAG (Retrieval-Augmented Generation)</strong>.

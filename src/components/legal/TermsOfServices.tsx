@@ -23,10 +23,10 @@ export default function TermsOfService() {
                   <strong>Última atualização:</strong> 29 de setembro de 2026
                 </p>
                 <p className="mb-4 text-justify">
-                  Estes Termos de Serviço ("Termos") regem o uso da plataforma <EnfLogo/> ("Plataforma" ou "Serviço"), mantida e operada por Meshia Inteligência de Negócios LTDA, inscrita no CNPJ sob o nº 00.000.000/0001-11 ("Empresa").
+                  Estes Termos de Serviço (&quot;Termos&quot;) regem o uso da plataforma <EnfLogo/> (&quot;Plataforma&quot; ou &quot;Serviço&quot;), mantida e operada por Meshia Inteligência de Negócios LTDA, inscrita no CNPJ sob o nº 00.000.000/0001-11 (&quot;Empresa&quot;).
                 </p>
                 <p className="mb-6 text-justify">
-                  Ao criar uma conta ou utilizar qualquer funcionalidade de nossa plataforma de chatbots e agentes baseados em RAG (Retrieval-Augmented Generation), você ("Cliente" ou "Usuário") concorda expressa e integralmente com estes Termos. Se você não concordar com qualquer disposição aqui prevista, não deverá utilizar o Serviço.
+                  Ao criar uma conta ou utilizar qualquer funcionalidade de nossa plataforma de chatbots e agentes baseados em RAG (Retrieval-Augmented Generation), você (&quot;Cliente&quot; ou &quot;Usuário&quot;) concorda expressa e integralmente com estes Termos. Se você não concordar com qualquer disposição aqui prevista, não deverá utilizar o Serviço.
                 </p>
                 <hr className="my-8 border-gray-300" />
                 <section className="mb-8">
@@ -92,7 +92,7 @@ export default function TermsOfService() {
                   
                   <ul className="list-disc list-inside space-y-3 mb-4">
                     <li>
-                      <strong>Propriedade do Cliente:</strong> O Cliente mantém a titularidade e todos os direitos de propriedade intelectual sobre os arquivos, documentos e dados enviados para alimentação do RAG ("Conteúdo do Cliente").
+                      <strong>Propriedade do Cliente:</strong> O Cliente mantém a titularidade e todos os direitos de propriedade intelectual sobre os arquivos, documentos e dados enviados para alimentação do RAG (&quot;Conteúdo do Cliente&quot;).
                     </li>
                     <li>
                       <strong>Propriedade da Empresa:</strong> A Empresa detém todos os direitos de propriedade intelectual referentes ao software, código-fonte, design, marca, algoritmo de RAG, conectores e funcionalidades da Plataforma.
@@ -183,7 +183,7 @@ export default function TermsOfService() {
                       <strong>E-mail de Suporte:</strong> [SEU-EMAIL@SEUDOMINIO.COM]
                     </li>
                     <li>
-                      <strong>Endereço:</strong> [ENDEREÇO FÍSICO OU "Atuação 100% Digital"]
+                      <strong>Endereço:</strong> [ENDEREÇO FÍSICO OU &quot;Atuação 100% Digital&quot;]
                     </li>
                   </ul>
                 </section>
