@@ -35,7 +35,7 @@ export default function RecoveryPage(){
             </form>
           </CardContent>
           <CardFooter className="flex flex-col items-center">
-            <Link href="/" className="flex items-center gap-2 text-primary hover:underline font-medium "><ArrowLeft size="20"/>Voltar para Login</Link>
+            <Link href="/auth" className="flex items-center gap-2 text-primary hover:underline font-medium "><ArrowLeft size="20"/>Voltar para Login</Link>
           </CardFooter>
         </Card>
 

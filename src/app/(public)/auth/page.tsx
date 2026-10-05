@@ -11,12 +11,12 @@ import { BadgeCheck, BotMessageSquare, ShieldCheck } from "lucide-react";
 // ========= costume imports ============
 import { GitHubBrand, GoogleBrand } from "@/components/external-brands/LogoBrands"
 import EnfLogo from "@/components/logos/EnfLogo";
-import LogoLayout from "../components/logos/Logo";
-import SignInPage from "./(public)/auth/sign-in/page";
+import LogoLayout from "../../../components/logos/Logo";
+import SignInPage from "./(sign-in)/SignIn";
 import Link from "next/link";
-import SignUpPage from "./(public)/auth/sign-up/page";
-import TermsOfService from "../components/legal/TermsOfServices";
-import PrivacyPolicies from "../components/legal/PrivacyPolicies";
+import SignUpPage from "./(sign-up)/SignUp";
+import TermsOfService from "../../../components/legal/TermsOfServices";
+import PrivacyPolicies from "../../../components/legal/PrivacyPolicies";
  
 // ========= others imports ============
 
