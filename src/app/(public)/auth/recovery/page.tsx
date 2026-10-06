@@ -1,12 +1,26 @@
+'use client'
+
+// ===== Imports React =====
+import { useState, useEffect } from 'react';
+
+
 import EnfLogo from "@/components/logos/EnfLogo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Timer } from "lucide-react";
 import Link from "next/link";
 
-export default function RecoveryPage(){
+export default function RecoveryPage() {
+
+  const errors = {
+    email: false,
+    password:false
+  }
+
+  
+  
   return (
     <div className="min-h-screen w-max-[700px] bg-grid flex flex-col items-center justify-center">
       
@@ -30,7 +44,20 @@ export default function RecoveryPage(){
                 className="py-5"
                 required
               />
+              <div className="h-5">
+                {errors.email && (
+                      <p className="text-xs text-destructive">
+                    {/*{errors.email.message}*/}
+                    Mensagem teste de erro
+                      </p>
+                    )}
+              </div>
               <Button className="py-5 mt-4">Recuperar Acesso</Button>
+              <div className="h-5">
+                <p className="w-full text-xs text-center p-4 text-gray-500">
+                  Solicitar código novamente em... (30 segundos)
+                </p>
+              </div>
             </div>
             </form>
           </CardContent>

@@ -67,7 +67,7 @@ export default function Home() {
               <TabsTrigger value="login" className="rounded-sm"> Entrar</TabsTrigger>
               <TabsTrigger value="register" className="rounded-sm"> Cadastrar </TabsTrigger>
             </TabsList>
-            <TabsContent value="login">
+            <TabsContent value="login" >
 
               
               <div id="title" className="mt-3 mb-2 flex flex-col items-center gap-4">
@@ -92,31 +92,32 @@ export default function Home() {
                   OU CONTINUE COM E-MAIL CORPORATIVO
                 </span>
               </div>
-              <div id="inputs" className="flex flex-col w-full my-3 h-full">
+              <div className="flex flex-col justify-evenly">
+              <div id="inputs" className="flex flex-col w-full ">
                 <SignInPage />
               </div>
               <div className="flex w-full justify-evenly items-center">
-                <Link href="auth/recovery" className="text-xs font-medium text-muted-foreground hover:underline hover:text-primary px-1 text-nowrap">
+                <Link href="auth/recovery" prefetch={true} transitionTypes={['slide-in']} className="text-xs font-medium text-muted-foreground hover:underline hover:text-primary px-1 text-nowrap">
                   Esqueceu sua Senha?
                 </Link>
                 <TermsOfService/>
                 <PrivacyPolicies/>
               </div>
-              
+              </div>
             </TabsContent>
 
             
-            <TabsContent value="register" >
+            <TabsContent value="register" className="overflow-hidden">
 
               
-              <div id="title" className="mt-3 mb-2 flex flex-col items-center gap-4" >
-                <div className="flex flex-col px-4 w-full items-start gap-1">
+              <div id="title" className=" flex flex-col items-center gap-2" >
+                <div className="flex flex-col px-2 w-full items-start gap-1">
                   <h1 className="mb text-2xl font-bold"> Cadastre-se </h1>
                   <p className="font-inter text-[14px] font-normal text-[#94A3B8]">
                     Cadastre-se e conheça nossos serviços.
                   </p> 
                 </div>
-                <div id="inputs" className="flex flex-col flex-1 w-full my-3 h-full">
+                <div id="inputs" className="flex flex-col flex-1 w-full h-full">
                   <SignUpPage/>
                 </div>
                 
