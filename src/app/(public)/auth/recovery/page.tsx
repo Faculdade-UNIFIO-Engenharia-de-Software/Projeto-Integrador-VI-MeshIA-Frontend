@@ -1,15 +1,13 @@
 'use client'
 
 // ===== Imports React =====
-import { useState, useEffect } from 'react';
-
 
 import EnfLogo from "@/components/logos/EnfLogo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, Timer } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function RecoveryPage() {
@@ -22,8 +20,7 @@ export default function RecoveryPage() {
   
   
   return (
-    <div className="min-h-screen w-max-[700px] bg-grid flex flex-col items-center justify-center">
-      
+    <div className="min-h-screen w-max-[700px] flex flex-col items-center justify-center">
       <Card className="w-dvh">
         <CardHeader>
         <CardTitle>

@@ -80,7 +80,7 @@ export default function SignUpPage() {
                 )}
           </div>
         </div>
-        <Button className="w-full mt-4 text-white">Cadastrar</Button>
+        <Button className="w-full py-4.5 mt-1 text-white">Cadastrar</Button>
     </form>
     </div>
   )

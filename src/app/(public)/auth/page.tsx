@@ -1,5 +1,5 @@
 // ========= shadcn imports ============
-
+import SpotlightCard from '@/components/react-bits/SpotlightCard'
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -23,12 +23,13 @@ import PrivacyPolicies from "../../../components/legal/PrivacyPolicies";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-grid">
+    <div className="min-h-screen">
+      
       <div className="w-full h-screen flex  items-center justify-center gap-8 text-black">
         <div id="info-layer" className="flex flex-col gap-8">
           <LogoLayout variant="left" />
           <div id="cards" className="flex flex-1 gap-4">
-            <Card className=" flex flex-col items-start h-auto w-50 hover:ring-primary transition ease-in-out">
+            <Card className="border-none flex flex-col w-50 h-auto items-start transition ease-in-out">
               <CardHeader className="flex flex-col font-inter text-nowrap gap-2">
                 <Badge variant="default"><BadgeCheck data-icon="inline-start" />Data Catalog</Badge>
                 Catálogo de Dados
@@ -36,7 +37,7 @@ export default function Home() {
               <CardContent className="text-justify text-gray">
                 Conhecimento sistêmico de todos os dados da sua operação sem silos de dados.
               </CardContent>
-            </Card>
+              </Card>
             <Card className=" flex flex-col items-start h-auto w-50 hover:ring-primary transition ease-in-out">
               <CardHeader className="flex flex-col font-inter text-nowrap gap-2">
                 <Badge variant="default"><BotMessageSquare data-icon="inline-start" />Chatbot IA</Badge>
@@ -58,12 +59,14 @@ export default function Home() {
           </div>
         </div>
 
+        
         <div
           id="signin-box"
-          className="border  border-b-gray-300  bg-white gap-8 px-8 py-8 rounded-md w-125 h-150"
-        >
+          className="  bg-white gap-8 px-8 py-8 rounded-md w-125 h-150"
+      >
+        
           <Tabs defaultValue="login" className="w-full">
-            <TabsList className="w-full rounded-sm">
+            <TabsList className="w-full rounded-sm ">
               <TabsTrigger value="login" className="rounded-sm"> Entrar</TabsTrigger>
               <TabsTrigger value="register" className="rounded-sm"> Cadastrar </TabsTrigger>
             </TabsList>
@@ -124,7 +127,7 @@ export default function Home() {
                 
               </div>
             </TabsContent>
-          </Tabs>
+            </Tabs>
 
       </div>
       </div>

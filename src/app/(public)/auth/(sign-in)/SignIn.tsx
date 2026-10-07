@@ -72,7 +72,7 @@ export default function SignInPage() {
           </div>
         </div>
       </form>
-      <Button className="w-full text-white">Entrar</Button>
+      <Button className="w-full py-4.5 text-white">Entrar</Button>
   </div>
   )
 }
