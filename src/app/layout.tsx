@@ -26,10 +26,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-br" className={cn("font-sans", `${geist.variable} ${inter.variable} ${jetbrainsMono.variable}`)}>
-      <ThemeProvider attribute="class" defaultTheme="light"  enableSystem>
-        <body>{children}</body>
-      </ThemeProvider>
+    <html lang="pt-br"
+      className={cn("font-sans", `${geist.variable} ${inter.variable} ${jetbrainsMono.variable}`)}
+      suppressHydrationWarning
+    >
+        <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+            {children}
+          </ThemeProvider>
+        </body>
     </html>
   );
 }

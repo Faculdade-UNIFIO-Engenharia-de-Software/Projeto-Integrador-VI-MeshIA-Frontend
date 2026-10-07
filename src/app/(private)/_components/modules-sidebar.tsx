@@ -33,7 +33,7 @@ export const sidebarModules = {
       title: "Configurações",
       url: "#",
       icon: Settings,
-      isActive: true,
+      isActive: false,
       items: [
         {
           title: "Usuários",

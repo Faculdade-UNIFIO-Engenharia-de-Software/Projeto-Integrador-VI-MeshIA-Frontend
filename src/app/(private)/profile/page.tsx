@@ -1,5 +1,7 @@
 export default function Profile(){
   return (
-    <div>Profile</div>
+    <div className="container">
+      
+    </div>
   )
 }

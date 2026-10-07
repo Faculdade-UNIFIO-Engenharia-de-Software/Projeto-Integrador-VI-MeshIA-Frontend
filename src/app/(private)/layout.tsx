@@ -7,8 +7,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <AppSidebar />
       <main className="flex flex-col flex-1 gap-2 p-2">
-        <div className="flex flex-1 m-2 justify-between">
-          <SidebarTrigger className="w-10 h-10 "/>
+        <div className="flex m-2 justify-between">
+          <SidebarTrigger className="w-8 h-8"/>
           <ModeToggle/>
         </div>
         {children}
