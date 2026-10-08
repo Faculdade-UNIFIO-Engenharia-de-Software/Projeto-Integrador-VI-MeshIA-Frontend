@@ -33,7 +33,7 @@ export default function RecoveryPage() {
           <CardContent className="p-4">
           <form id="access-recovery">
               <div className="flex flex-col gap-2">
-                <Label htmlFor="email">E-mail:</Label>
+                <Label htmlFor="email" className="font-inter">E-mail:</Label>
                 <Input
                   type="text"
                   name="email"

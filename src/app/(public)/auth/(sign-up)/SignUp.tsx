@@ -13,13 +13,13 @@ export default function SignUpPage() {
     <div className="flex flex-col mt-2 px-2">
       <form action=''>
         <div className="space-y-2 mb-2">
-          <Label htmlFor="completeName">Nome Completo:</Label>
+          <Label htmlFor="completeName" className="font-inter">Nome Completo:</Label>
           <Input
             name="completeName" 
             type="text" 
             id="completeName"
             placeholder="Digite seu completo"
-            className="py-4.5" />
+            className="py-4.5 " />
             <div className="h-5">
               {errors.email && (
                     <p className="text-xs text-destructive">
@@ -30,7 +30,7 @@ export default function SignUpPage() {
             </div>
         </div>
       <div className="space-y-2 mb-2">
-        <Label htmlFor="email">E-mail:</Label>
+        <Label htmlFor="email" className="font-inter">E-mail:</Label>
         <Input
           name="email" 
           type="email" 
@@ -47,7 +47,7 @@ export default function SignUpPage() {
         </div>
       </div>
       <div className="space-y-2 mb-2">
-        <Label htmlFor="password">Senha:</Label>
+        <Label htmlFor="password" className="font-inter">Senha:</Label>
         <Input
           name="password" 
           type="password" 
@@ -64,7 +64,7 @@ export default function SignUpPage() {
         </div>
       </div>
         <div className="space-y-2 mb-2">
-          <Label htmlFor="passwordConfirm">Confirmar Senha:</Label>
+          <Label htmlFor="passwordConfirm" className="font-inter">Confirmar Senha:</Label>
           <Input
             name="passwordConfirm" 
             type="password" 

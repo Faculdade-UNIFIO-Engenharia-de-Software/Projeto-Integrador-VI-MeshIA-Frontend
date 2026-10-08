@@ -1,6 +1,4 @@
 // === Icones ===
-
-
 import { Settings, ChartNetwork, BuildingComplex } from "lucide-react"
 
 
@@ -14,17 +12,17 @@ export const sidebarModules = {
       items: [
         {
           title: "Dashboards",
-          url:"#",
+          url:"/dashboards",
           isActive:true
         },
         {
           title: "ChatIA",
-          url:"#",
+          url:"/chats",
           isActive:true
         },
         {
           title: "Catálogo de Dados",
-          url:"#",
+          url:"/data-catalog",
           isActive:true
         },
       ]
@@ -37,12 +35,12 @@ export const sidebarModules = {
       items: [
         {
           title: "Usuários",
-          url:"#",
+          url:"/users",
           isActive:true
         },
         {
           title: "Times",
-          url:"#",
+          url:"/squads",
           isActive:true
         },
         {
@@ -52,7 +50,7 @@ export const sidebarModules = {
         },
         {
           title: "Faturamento",
-          url: "#",
+          url: "/billing",
           isActive:true
         },
       ]

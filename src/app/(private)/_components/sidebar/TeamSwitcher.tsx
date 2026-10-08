@@ -29,7 +29,7 @@ export default function TeamSwitcher(
   
 
   return (
-    <SidebarMenu className="border border-gray-300 rounded-sm shadow-md mb-2">
+    <SidebarMenu className="rounded-xl shadow-md mb-2">
           <SidebarMenuItem>
           <DropdownMenu>
             

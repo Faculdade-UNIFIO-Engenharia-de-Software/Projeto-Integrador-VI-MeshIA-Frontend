@@ -37,11 +37,11 @@ export default function NavMain(
       <SidebarMenu>
         
         <SidebarMenuItem>
-          <SidebarMenuButton
+          <SidebarMenuButton 
             render={
               <Link href="/">
                 <House />
-                <span>Home</span>
+                <span >Home</span>
               </Link>
             }/>
         </SidebarMenuItem>
