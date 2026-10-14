@@ -28,7 +28,7 @@ export default function SignInPage() {
       <form action='' >
         <div id="inputOnly" className="flex flex-col">
           <div className="space-y-2 py-2 ">
-            <Label htmlFor="email" className="font-inter">E-mail:</Label>
+            <Label htmlFor="email" >E-mail:</Label>
             <Input
               name="email"
               type="email" 
@@ -47,7 +47,7 @@ export default function SignInPage() {
             </div>
           </div>
           <div className="space-y-2 mb-2 py-2">
-          <Label htmlFor="password" className="font-inter">Senha:</Label>
+          <Label htmlFor="password" >Senha:</Label>
           <InputGroup className="py-5">
             <InputGroupInput
               id="password"

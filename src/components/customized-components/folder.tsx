@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import Link from "next/link"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -7,8 +8,8 @@ import { cn } from "@/lib/utils"
 const folderVariants = cva(
   [
     "group",
-    "flex items-center",
-    "w-full",
+    "flex items-center gap-3",
+    "w-full min-w-0",
     "rounded-md",
     "border border-border",
     "bg-card",
@@ -23,7 +24,6 @@ const folderVariants = cva(
           "hover:bg-accent",
           "hover:text-accent-foreground",
         ],
-
         ghost: [
           "border-transparent",
           "bg-transparent",
@@ -31,13 +31,11 @@ const folderVariants = cva(
           "hover:bg-accent",
           "hover:text-accent-foreground",
         ],
-
         selected: [
           "border-primary",
           "bg-accent",
           "text-accent-foreground",
         ],
-
         link: [
           "cursor-pointer",
           "hover:bg-accent",
@@ -45,7 +43,6 @@ const folderVariants = cva(
           "hover:border-accent",
         ],
       },
-
       size: {
         xs: "min-h-10 max-w-70 px-2 gap-2",
         sm: "min-h-12 max-w-70 px-3 gap-2",
@@ -54,7 +51,6 @@ const folderVariants = cva(
         xl: "min-h-24 max-w-70 px-6 gap-4",
       },
     },
-
     defaultVariants: {
       variant: "default",
       size: "md",
@@ -82,7 +78,6 @@ const folderIconVariants = cva(
         xl: "size-14",
       },
     },
-
     defaultVariants: {
       size: "md",
     },
@@ -106,7 +101,6 @@ const folderTextVariants = cva(
         xl: "text-lg",
       },
     },
-
     defaultVariants: {
       size: "md",
     },
@@ -132,59 +126,59 @@ function Folder({
   href,
   ...props
 }: FolderProps) {
-  const isLink = variant === "link"
+  const isLink = variant === "link" && Boolean(href)
 
   const content = (
     <>
-      <div className={`cn(folderIconVariants({ size }))`}>
+      <div className={cn(folderIconVariants({ size }))}>
         {icon}
       </div>
 
-      <span className={`cn(folderTextVariants({ size })) px-4`}>
+      <span className={cn(folderTextVariants({ size }))}>
         {children}
       </span>
     </>
   )
 
+  const classes = cn(
+    folderVariants({ variant, size }),
+    className
+  )
+
+  if (isLink && href) {
+    return (
+      <Link
+        href={href}
+        data-slot="folder"
+        className={cn(classes, "no-underline")}
+        {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
+        {content}
+
+        {action && (
+          <div
+            className="ml-auto shrink-0"
+            onClick={(event) => event.stopPropagation()}
+          >
+            {action}
+          </div>
+        )}
+      </Link>
+    )
+  }
+
   return (
     <div
       data-slot="folder"
-      className={cn(
-        folderVariants({
-          variant,
-          size,
-        }),
-        className
-      )}
+      className={classes}
       {...props}
     >
-      {isLink && href ? (
-        <>
-          <Link
-            href={href}
-            className="flex min-w-0 flex-1 items-center gap-inherit"
-          >
-            {content}
-          </Link>
+      {content}
 
-          {action && (
-            <div className="shrink-0">
-              {action}
-            </div>
-          )}
-        </>
-      ) : (
-        <>
-          <div className="flex min-w-0 flex-1 items-center gap-inherit">
-            {content}
-          </div>
-
-          {action && (
-            <div className="shrink-0">
-              {action}
-            </div>
-          )}
-        </>
+      {action && (
+        <div className="ml-auto shrink-0">
+          {action}
+        </div>
       )}
     </div>
   )

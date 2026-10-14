@@ -36,7 +36,7 @@ export default function Dashboards() {
             variant="link"
             icon={<FolderOpen />}
             size="md"
-            href={`/dashboards/${index}`}
+            href={`/dashboards/list`}
           >
             {item.workspace}
           </Folder>

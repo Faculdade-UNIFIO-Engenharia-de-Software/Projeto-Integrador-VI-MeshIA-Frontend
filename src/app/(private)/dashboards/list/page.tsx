@@ -2,16 +2,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { ChartNoAxesColumnDecreasing, ChevronLeft, Eye, MoveLeft, Pencil, Trash, Wallet } from "lucide-react";
+import { ChevronLeft, Eye, Pencil, Trash, Wallet } from "lucide-react";
 import Link from "next/link";
 
 export default function Page() {
   return (
     <div className="flex flex-col">
       <div id="title">
-        <Link href="/dashboards" className="flex mb-8 items-center gap-2 hover:text-primary"><ChevronLeft size={22}/>Voltar</Link>
+        <Link href="/dashboards" className="flex mb-8 items-center gap-2 hover:text-primary w-fit"><ChevronLeft size={22}/>Voltar</Link>
           <h4 className="flex gap-2">
             <Wallet />
             Financeiro
@@ -61,9 +61,15 @@ export default function Page() {
                 <Button variant="outline" size={"icon"} className=" text-center">
                   <Pencil/>
                 </Button>
-                <Button variant="outline" size={"icon"} className=" text-center">
-                  <Eye/>
-                </Button>
+                <Button variant="outline" size={"icon"} className=" text-center"
+                  render={ 
+                    <Link href={`/dashboards/list/1`}
+                    >
+                      <Eye />
+                    </Link>
+                  }
+                  />
+                  
                 <Button variant="destructive" size={"icon"} className=" text-center">
                   <Trash/>
                 </Button>

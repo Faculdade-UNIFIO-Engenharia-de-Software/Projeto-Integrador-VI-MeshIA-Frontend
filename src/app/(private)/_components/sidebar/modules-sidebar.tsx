@@ -1,5 +1,5 @@
 // === Icones ===
-import { Settings, ChartNetwork, BuildingComplex } from "lucide-react"
+import { Settings, ChartNetwork, BuildingComplex, Grid2X2} from "lucide-react"
 
 
 export const sidebarModules = {
@@ -23,6 +23,34 @@ export const sidebarModules = {
         {
           title: "Catálogo de Dados",
           url:"/data-catalog",
+          isActive:true
+        },
+      ]
+    },
+    {
+      title: "Engenharia de Dados",
+      url: "#",
+      icon: Grid2X2,
+      isActive: false,
+      items: [
+        {
+          title: "Fontes",
+          url:"#",
+          isActive:true
+        },
+        {
+          title: "Pipelines",
+          url:"#",
+          isActive:true
+        },
+        {
+          title: "Jobs",
+          url:"#",
+          isActive:true
+        },
+        {
+          title: "Linhagem",
+          url:"#",
           isActive:true
         },
       ]
