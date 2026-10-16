@@ -1,10 +1,9 @@
 // === Icones ===
-import { Settings, ChartNetwork, BuildingComplex, Grid2X2, House, BotMessageSquare, Database, Users, History } from "lucide-react";
+import { Settings, ChartNetwork, BuildingComplex, Grid2X2, BotMessageSquare, Database, Users, History } from "lucide-react";
 
 export const sidebarModules = {
   navMain: [
     // ===== Menu da V1 (segue o Figma) =====
-    { title: "Home", url: "/", icon: House },
     { title: "Chat / Consultas", url: "/chats", icon: BotMessageSquare },
     { title: "Bases de Dados", url: "/data-catalog", icon: Database },
     { title: "Usuários & Equipes", url: "/users", icon: Users },
