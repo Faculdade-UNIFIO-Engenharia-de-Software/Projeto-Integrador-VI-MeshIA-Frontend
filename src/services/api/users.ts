@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import type { Role } from "@/lib/roles";
 
 export type UserStatus = "active" | "suspended";
+export type UserUpdate = { role?: Role; status?: UserStatus };
 
 export type UserItem = {
   id: string;
@@ -143,31 +144,30 @@ export async function listTeams(): Promise<Result<TeamItem[]>> {
   return apiGet<TeamItem[]>("/teams");
 }
 
-export async function updateUser(id: string, data: { role?: string; status?: string }): Promise<Result<void>> {
+export async function updateUser(id: string, patch: UserUpdate): Promise<Result<UserItem>> {
   if (USE_MOCK) {
     await delay(400);
     const user = MOCK_USERS.find((u) => u.id === id);
     if (!user) return { ok: false, message: "Colaborador não encontrado." };
-
-    if (data.role) user.role = data.role as Role;
-    if (data.status) user.status = data.status as UserStatus;
-
-    return { ok: true, data: undefined };
+    Object.assign(user, patch); // no mock, a mudança fica só em memória (reinicia ao reiniciar o servidor)
+    return { ok: true, data: user };
   }
 
   try {
     const token = (await cookies()).get("token")?.value;
     const res = await fetch(`${process.env.API_URL}/users/${encodeURIComponent(id)}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify(patch), // contrato a combinar com o back
+      cache: "no-store",
     });
-
-    if (!res.ok) return { ok: false, message: "Erro ao atualizar colaborador." };
-    return { ok: true, data: undefined };
+    if (!res.ok) {
+      return {
+        ok: false,
+        message: res.status === 403 ? "Você não tem permissão para esta ação." : "Não foi possível salvar.",
+      };
+    }
+    return { ok: true, data: (await res.json()) as UserItem };
   } catch {
     return { ok: false, message: "Servidor indisponível. Tente novamente." };
   }
