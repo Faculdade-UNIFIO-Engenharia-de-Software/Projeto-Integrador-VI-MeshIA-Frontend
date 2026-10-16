@@ -10,6 +10,7 @@ import { formatDateTime, initials } from "@/lib/format";
 import { findRole } from "@/lib/roles";
 import { cn } from "@/lib/utils";
 import { getUser, listTeams, listUsers, type UserItem } from "@/services/api/users";
+import { UserAccessForm } from "./_components/UserAccessForm";
 
 type SearchParams = Promise<{ q?: string | string[]; user?: string | string[] }>;
 
@@ -175,8 +176,7 @@ function UserDetail({ user }: { user: UserItem }) {
 
       <Separator className="my-6" />
 
-      <h4 className="text-sm font-semibold">Cargo de acesso</h4>
-      <p className="mt-1 text-sm text-muted-foreground">{role?.description}</p>
+      <UserAccessForm key={`${user.id}-${user.role}-${user.status}`} id={user.id} role={user.role} status={user.status} />
     </section>
   );
 }
