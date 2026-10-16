@@ -1,6 +1,6 @@
-export type Role = "admin" | "senior_analyst" | "junior_analyst" | "viewer";
+export const ROLE_VALUES = ["admin", "senior_analyst", "junior_analyst", "viewer"] as const;
+export type Role = (typeof ROLE_VALUES)[number];
 
-// Textos provisórios: alinhar com os perfis reais do RBAC (CASL) do back-end.
 export const ROLES: { value: Role; label: string; description: string }[] = [
   {
     value: "admin",
