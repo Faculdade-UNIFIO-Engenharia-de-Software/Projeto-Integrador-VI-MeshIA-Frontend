@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Form from "next/form";
-import { Search, Users } from "lucide-react";
+import { Search, UserPlus, Users } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,7 @@ import { findRole } from "@/lib/roles";
 import { cn } from "@/lib/utils";
 import { getUser, listTeams, listUsers, type UserItem } from "@/services/api/users";
 import { UserAccessForm } from "./_components/UserAccessForm";
+import { buttonVariants } from "@/components/ui/button";
 
 type SearchParams = Promise<{ q?: string | string[]; user?: string | string[] }>;
 
@@ -38,10 +39,16 @@ export default async function UsersPage({ searchParams }: { searchParams: Search
   return (
     <>
       <div id="title">
-        <h4 className="flex gap-2">
-          <Users />
-          Usuários & Equipes
-        </h4>
+        <div className="flex flex-wrap items-start justify-between gap-2">
+          <h4 className="flex gap-2">
+            <Users />
+            Usuários & Equipes
+          </h4>
+          <Link href="/users/new" className={buttonVariants()}>
+            <UserPlus />
+            Novo colaborador
+          </Link>
+        </div>
         <p className="text-muted-foreground mt-1 mb-6">Gerencie colaboradores, cargos e equipes.</p>
         <Separator />
       </div>

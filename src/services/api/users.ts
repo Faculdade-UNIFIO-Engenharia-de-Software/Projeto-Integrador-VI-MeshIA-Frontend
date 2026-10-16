@@ -17,6 +17,8 @@ export type UserItem = {
 
 export type TeamItem = { id: string; name: string; members: number };
 
+export type NewUser = Pick<UserItem, "name" | "email" | "jobTitle" | "department" | "role">;
+
 type Result<T> = { ok: true; data: T } | { ok: false; message: string };
 
 const USE_MOCK = process.env.USE_MOCK_API === "true";
@@ -166,6 +168,40 @@ export async function updateUser(id: string, patch: UserUpdate): Promise<Result<
         ok: false,
         message: res.status === 403 ? "Você não tem permissão para esta ação." : "Não foi possível salvar.",
       };
+    }
+    return { ok: true, data: (await res.json()) as UserItem };
+  } catch {
+    return { ok: false, message: "Servidor indisponível. Tente novamente." };
+  }
+}
+
+export async function createUser(input: NewUser): Promise<Result<UserItem>> {
+  if (USE_MOCK) {
+    await delay(500);
+    if (MOCK_USERS.some((u) => u.email === input.email)) {
+      return { ok: false, message: "Já existe um colaborador com este e-mail." };
+    }
+    const user: UserItem = { id: `u${Date.now()}`, ...input, status: "active", lastAccess: null };
+    MOCK_USERS.push(user);
+    return { ok: true, data: user };
+  }
+
+  try {
+    const token = (await cookies()).get("token")?.value;
+    const res = await fetch(`${process.env.API_URL}/users`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify(input), // contrato a combinar com o back
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      const message =
+        res.status === 409
+          ? "Já existe um colaborador com este e-mail."
+          : res.status === 403
+            ? "Você não tem permissão para esta ação."
+            : "Não foi possível cadastrar.";
+      return { ok: false, message };
     }
     return { ok: true, data: (await res.json()) as UserItem };
   } catch {
