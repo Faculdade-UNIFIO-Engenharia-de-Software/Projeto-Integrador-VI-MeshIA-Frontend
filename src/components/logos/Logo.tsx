@@ -2,9 +2,10 @@ import type { ComponentProps } from "react";
 
 type LogoLayoutProps = ComponentProps<"div"> & {
   variantLogo?: "left" | "center" | "right";
+  variant?: string;
 };
 
-export default function LogoLayout({ className, variantLogo = "left" }: LogoLayoutProps) {
+export default function LogoLayout({ className, variantLogo = "left", variant }: LogoLayoutProps) {
   return (
     <div className={`"flex flex-col gap-2 ${variantLogo}, ${className}"`}>
       <img className="h-14 w-auto" src="./logo-icon-nav.png" alt="" />
