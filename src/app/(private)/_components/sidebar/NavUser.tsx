@@ -1,4 +1,5 @@
 "use client";
+import { logoutAction } from "@/actions/auth/logoutAction";
 
 import { Settings2, ChevronsUpDown, LogOut, SquareUser } from "lucide-react";
 
@@ -64,9 +65,11 @@ export function NavUser({
             <DropdownMenuSeparator />
 
             <DropdownMenuGroup>
-              <DropdownMenuItem render={<Link href="/profile" />}>
+              <DropdownMenuItem>
                 <SquareUser />
-                Acessar Perfil
+                <Link href="/profile" className="flex">
+                  Acessar Perfil
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings2 />
@@ -75,7 +78,7 @@ export function NavUser({
             </DropdownMenuGroup>
 
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => logoutAction()}>
               <LogOut />
               Sair
             </DropdownMenuItem>
