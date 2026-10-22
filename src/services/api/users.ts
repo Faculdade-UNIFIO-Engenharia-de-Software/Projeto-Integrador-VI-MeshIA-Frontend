@@ -15,8 +15,13 @@ export type UserItem = {
   lastAccess: string | null; // ISO 8601
 };
 
-export type TeamItem = { id: string; name: string; members: number };
-
+export type TeamItem = {
+  id: string;
+  name: string;
+  members: number;
+  description?: string;
+  leadName?: string | null;
+};
 export type NewUser = Pick<UserItem, "name" | "email" | "jobTitle" | "department" | "role">;
 
 type Result<T> = { ok: true; data: T } | { ok: false; message: string };
@@ -204,6 +209,55 @@ export async function createUser(input: NewUser): Promise<Result<UserItem>> {
       return { ok: false, message };
     }
     return { ok: true, data: (await res.json()) as UserItem };
+  } catch {
+    return { ok: false, message: "Servidor indisponível. Tente novamente." };
+  }
+}
+
+export type NewTeam = {
+  name: string;
+  description: string;
+  leadId: string;
+  leadName: string;
+};
+
+export async function createTeam(input: NewTeam): Promise<Result<TeamItem>> {
+  if (process.env.USE_MOCK_API === "true") {
+    await new Promise((r) => setTimeout(r, 400));
+    if (MOCK_TEAMS.some((t) => t.name.toLowerCase() === input.name.toLowerCase())) {
+      return { ok: false, message: "Já existe uma equipe com esse nome." };
+    }
+    const team: TeamItem = {
+      id: `t${MOCK_TEAMS.length + 1}`,
+      name: input.name,
+      members: 1, // o líder conta como primeiro membro
+      description: input.description,
+      leadName: input.leadName,
+    };
+    MOCK_TEAMS.push(team);
+    return { ok: true, data: team };
+  }
+
+  try {
+    const token = (await cookies()).get("token")?.value;
+    const res = await fetch(`${process.env.API_URL}/teams`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ name: input.name, description: input.description, leadId: input.leadId }),
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      return {
+        ok: false,
+        message:
+          res.status === 403
+            ? "Você não tem permissão para criar equipes."
+            : res.status === 409
+              ? "Já existe uma equipe com esse nome."
+              : "Não foi possível criar a equipe.",
+      };
+    }
+    return { ok: true, data: (await res.json()) as TeamItem }; // contrato a combinar com o back
   } catch {
     return { ok: false, message: "Servidor indisponível. Tente novamente." };
   }
