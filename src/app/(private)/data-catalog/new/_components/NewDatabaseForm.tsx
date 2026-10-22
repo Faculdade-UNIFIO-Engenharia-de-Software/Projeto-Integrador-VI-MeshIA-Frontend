@@ -35,7 +35,7 @@ export default function NewDatabaseForm() {
   }
 
   return (
-    <form action={action} className="flex max-w-2xl flex-col gap-5" noValidate>
+    <form key={JSON.stringify(state.values ?? {})} action={action} className="flex max-w-2xl flex-col gap-5" noValidate>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Nome da base" error={e.name}>
           <Input name="name" defaultValue={v.name} placeholder="Ex.: Vendas & ERP" />

@@ -25,7 +25,7 @@ export default function NewSquadForm({ users }: { users: { id: string; name: str
   const e = state.fieldErrors ?? {};
 
   return (
-    <form action={action} className="flex max-w-xl flex-col gap-5" noValidate>
+    <form key={JSON.stringify(state.values ?? {})} action={action} className="flex max-w-xl flex-col gap-5" noValidate>
       <Field label="Nome da equipe" error={e.name}>
         <Input name="name" defaultValue={v.name} placeholder="Ex.: Analytics" />
       </Field>

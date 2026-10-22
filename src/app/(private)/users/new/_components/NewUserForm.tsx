@@ -39,7 +39,7 @@ export function NewUserForm() {
   const selectedRole = state.values?.role ?? "viewer";
 
   return (
-    <form action={formAction} noValidate className="flex max-w-2xl flex-col gap-6">
+    <form key={JSON.stringify(state.values ?? {})} action={formAction} noValidate className="flex max-w-2xl flex-col gap-6">
       <div className="grid gap-4 sm:grid-cols-2">
         {field("name", "Nome completo", { autoComplete: "off" })}
         {field("email", "E-mail corporativo", { type: "email", autoComplete: "off" })}

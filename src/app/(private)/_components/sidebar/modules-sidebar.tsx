@@ -1,4 +1,3 @@
-// === Icones ===
 import { Settings, ChartNetwork, BuildingComplex, Grid2X2, BotMessageSquare, Database, Users, History } from "lucide-react";
 
 export const sidebarModules = {
@@ -7,7 +6,7 @@ export const sidebarModules = {
     { title: "Chat / Consultas", url: "/chats", icon: BotMessageSquare },
     { title: "Bases de Dados", url: "/data-catalog", icon: Database },
     { title: "Usuários & Equipes", url: "/users", icon: Users },
-    { title: "Histórico de Análises", url: "/history", icon: History, hidden: true }, // a rota ainda não existe
+    { title: "Histórico de Análises", url: "/history", icon: History }, // a rota ainda não existe
     { title: "Configurações", url: "/profile", icon: Settings },
 
     // ===== Menu antigo: guardado e escondido (fora da V1) =====
