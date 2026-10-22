@@ -1,7 +1,8 @@
+import Link from "next/link";
 import { Database } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { listDatabases, type DatabaseItem, type DatabaseStatus } from "@/services/api/databases";
@@ -27,9 +28,15 @@ export default async function DataCatalogPage() {
             <Database />
             Bases de Dados
           </h4>
-          <Button disabled title="Disponível em uma próxima versão">
-            Cadastrar nova base
-          </Button>
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <h4 className="flex gap-2">
+              <Database />
+              Bases de Dados
+            </h4>
+            <Link href="/data-catalog/new" className={buttonVariants()}>
+              Cadastrar nova base
+            </Link>
+          </div>
         </div>
         <p className="text-muted-foreground mt-1 mb-6">Fontes de dados que o assistente pode consultar.</p>
         <Separator />
