@@ -1,7 +1,9 @@
 import Form from "next/form";
 import Link from "next/link";
 import { Database, FileText, Boxes, Sparkles, TrendingUp, Users, Wallet } from "lucide-react";
+import { Suspense } from "react";
 
+import RecentConversations from "./_components/RecentConversations";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { getMe } from "@/services/api/me";
@@ -84,6 +86,9 @@ export default async function Chats() {
           ))}
         </ul>
       </section>
+      <Suspense fallback={<p className="text-muted-foreground text-sm">Carregando consultas recentes...</p>}>
+        <RecentConversations />
+      </Suspense>
     </div>
   );
 }
