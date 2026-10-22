@@ -14,12 +14,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      USE_MOCK_API: "true" # o build não depende do back-end
+      USE_MOCK_API: "true"
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4 # lê a versão do campo packageManager
+      - uses: pnpm/action-setup@v4
 
       - uses: actions/setup-node@v4
         with:
@@ -30,7 +30,6 @@ jobs:
 
       - name: Lint
         run: pnpm lint
-        continue-on-error: true # TODO: remover depois do PR que corrige os erros de lint
 
       - name: Build
         run: pnpm build
