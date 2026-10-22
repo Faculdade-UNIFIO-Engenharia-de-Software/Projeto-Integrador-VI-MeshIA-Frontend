@@ -170,6 +170,10 @@ function UserDetail({ user }: { user: UserItem }) {
           </div>
           <p className="truncate text-sm text-muted-foreground">{user.email}</p>
         </div>
+
+        <Link href={`/users/${user.id}/edit`} className="text-muted-foreground hover:text-foreground text-xs underline">
+          Editar dados
+        </Link>
       </div>
 
       <Separator className="my-6" />
