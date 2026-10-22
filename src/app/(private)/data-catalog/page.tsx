@@ -98,6 +98,9 @@ function DatabaseCard({ database }: { database: DatabaseItem }) {
           <dd className="font-medium">{database.tables} mapeadas</dd>
         </div>
       </dl>
+      <Link href={`/data-catalog/${database.id}/edit`} className="text-muted-foreground hover:text-foreground w-fit text-xs underline">
+        Editar
+      </Link>
     </article>
   );
 }
