@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 
 export type Source = { database: string; table: string };
 export type Answer = { text: string; sources: Source[] };
+import { recordMockConversation } from "./conversations";
 
 type Result<T> = { ok: true; data: T } | { ok: false; message: string };
 
@@ -9,8 +10,13 @@ export async function askQuestion(question: string): Promise<Result<Answer>> {
   if (process.env.USE_MOCK_API === "true") {
     await new Promise((r) => setTimeout(r, 1500));
 
-    // Para testar o estado de erro: inclua [erro] na pergunta.
-    if (question.includes("[erro]")) {
+    if (process.env.USE_MOCK_API === "true") {
+      await new Promise((r) => setTimeout(r, 1500));
+
+      if (question.includes("[erro]")) {
+        return { ok: false, message: "Não foi possível analisar os dados agora." };
+      }
+      recordMockConversation(question);
       return { ok: false, message: "Não foi possível analisar os dados agora." };
     }
 

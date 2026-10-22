@@ -5,7 +5,7 @@ export type ConversationSummary = {
   title: string;
   preview: string;
   messageCount: number;
-  updatedAt: string; // ISO 8601
+  updatedAt: string;
 };
 
 type ListResult = { ok: true; data: ConversationSummary[] } | { ok: false; message: string };
@@ -57,7 +57,23 @@ const MOCK: ConversationSummary[] = [
   },
 ];
 
-// remove acentos e maiúsculas para a busca ignorar isso
+export function recordMockConversation(question: string) {
+  const q = question.trim();
+  const now = new Date().toISOString();
+  const existing = MOCK.find((c) => c.preview === q);
+  if (existing) {
+    existing.updatedAt = now;
+    return;
+  }
+  MOCK.unshift({
+    id: `c${MOCK.length + 1}`,
+    title: q.length > 60 ? `${q.slice(0, 57)}...` : q,
+    preview: q,
+    messageCount: 2,
+    updatedAt: now,
+  });
+}
+
 const normalize = (s: string) =>
   s
     .normalize("NFD")
@@ -68,8 +84,8 @@ export async function listConversations(query?: string): Promise<ListResult> {
   if (USE_MOCK) {
     await new Promise((r) => setTimeout(r, 400));
     const q = normalize(query?.trim() ?? "");
-    const data = MOCK.filter((c) => !q || normalize(c.title).includes(q) || normalize(c.preview).includes(q)).sort((a, b) =>
-      b.updatedAt.localeCompare(a.updatedAt),
+    const data = MOCK.filter((c) => !q || normalize(c.title).includes(q) || normalize(c.preview).includes(q)).sort(
+      (a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt),
     );
     return { ok: true, data };
   }
@@ -85,7 +101,6 @@ export async function listConversations(query?: string): Promise<ListResult> {
     });
     if (!res.ok) return { ok: false, message: "Não foi possível carregar o histórico." };
 
-    // formato a combinar com o back: lista de ConversationSummary
     return { ok: true, data: await res.json() };
   } catch {
     return { ok: false, message: "Servidor indisponível. Tente novamente." };
