@@ -262,3 +262,41 @@ export async function createTeam(input: NewTeam): Promise<Result<TeamItem>> {
     return { ok: false, message: "Servidor indisponível. Tente novamente." };
   }
 }
+
+export type UserProfileUpdate = { name: string; jobTitle: string; department: string };
+
+export async function updateUserProfile(id: string, input: UserProfileUpdate): Promise<Result<UserItem>> {
+  if (USE_MOCK) {
+    await delay(400);
+    const user = MOCK_USERS.find((u) => u.id === id);
+    if (!user) return { ok: false, message: "Colaborador não encontrado." };
+    user.name = input.name;
+    user.jobTitle = input.jobTitle;
+    user.department = input.department;
+    return { ok: true, data: user };
+  }
+
+  try {
+    const token = (await cookies()).get("token")?.value;
+    const res = await fetch(`${process.env.API_URL}/users/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify(input),
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      return {
+        ok: false,
+        message:
+          res.status === 403
+            ? "Você não tem permissão para editar colaboradores."
+            : res.status === 404
+              ? "Colaborador não encontrado."
+              : "Não foi possível salvar os dados.",
+      };
+    }
+    return { ok: true, data: (await res.json()) as UserItem }; // contrato a combinar com o back
+  } catch {
+    return { ok: false, message: "Servidor indisponível. Tente novamente." };
+  }
+}
