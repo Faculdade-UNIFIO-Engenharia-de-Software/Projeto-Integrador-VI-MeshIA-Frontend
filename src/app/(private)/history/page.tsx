@@ -34,7 +34,7 @@ export default async function HistoryPage({ searchParams }: { searchParams: Prom
           <InputGroupAddon align="inline-start">
             <Search />
           </InputGroupAddon>
-          <InputGroupInput name="q" defaultValue={q} placeholder="Buscar por título ou conteúdo" aria-label="Buscar conversas" />
+          <InputGroupInput key={q ?? ""} name="q" defaultValue={q} placeholder="Buscar por título ou conteúdo" aria-label="Buscar conversas" />
         </InputGroup>
       </Form>
 
@@ -82,8 +82,11 @@ async function ConversationList({ query }: { query: string }) {
     <ul className="flex flex-col gap-2">
       {result.data.map((c) => (
         <li key={c.id}>
-          {/* TODO: levar para /chats/[id] quando o chat abrir uma conversa específica */}
-          <Link href="/chats" className="flex flex-col gap-1 rounded-lg border bg-card p-4 transition-colors hover:bg-accent">
+          {/* levar para /chats/[id] quando o back guardar as respostas */}
+          <Link
+            href={`/chats/nova?q=${encodeURIComponent(c.preview)}`}
+            className="flex flex-col gap-1 rounded-lg border bg-card p-4 transition-colors hover:bg-accent"
+          >
             <div className="flex items-start justify-between gap-4">
               <span className="font-medium">{c.title}</span>
               <time dateTime={c.updatedAt} className="shrink-0 text-xs text-muted-foreground">
