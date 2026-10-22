@@ -5,9 +5,10 @@ type LogoLayoutProps = ComponentProps<"div"> & {
   variant?: string;
 };
 
-export default function LogoLayout({ className, variantLogo = "left", variant }: LogoLayoutProps) {
+export default function LogoLayout({ className, variantLogo = "left" }: LogoLayoutProps) {
   return (
     <div className={`"flex flex-col gap-2 ${variantLogo}, ${className}"`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="h-14 w-auto" src="./logo-icon-nav.png" alt="" />
       <h1 className="text-5xl font-extrabold text-white">
         Mesh<span className="text-[#3EE1B7]">IA</span>

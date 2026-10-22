@@ -1,12 +1,11 @@
-'use client'
+"use client";
 
-import { Folder } from "@/components/customized-components/folder"
+import { Folder } from "@/components/customized-components/folder";
 import { Separator } from "@/components/ui/separator";
-import {ChartNoAxesColumnDecreasing, FolderOpen, Plus, Settings} from "lucide-react";
+import { ChartNoAxesColumnDecreasing, FolderOpen, Plus, Settings } from "lucide-react";
 
-import { dashboads, type TDashboards } from "@/actions/dashboards/artefact/dashboards";
+import { dashboads } from "@/actions/dashboards/artefact/dashboards";
 import { Button } from "@/components/ui/button";
-
 
 export default function Dashboards() {
   return (
@@ -17,31 +16,25 @@ export default function Dashboards() {
           Workspace Dashoards
         </h4>
         <p className="text-muted-foreground mt-1 mb-6">Acesse as dashboards da sua organização</p>
-        <Separator/>
+        <Separator />
       </div>
       <div className="flex gap-4 justify-between">
         <Button>
-          <Plus/>
+          <Plus />
           Adicionar
         </Button>
         <Button variant="secondary">
-          <Settings/>
+          <Settings />
           Gerenciar Acessos
         </Button>
       </div>
       <div className="grid grid-cols-5 gap-8">
         {dashboads.map((item, index) => (
-          <Folder
-            key={index}
-            variant="link"
-            icon={<FolderOpen />}
-            size="md"
-            href={`/dashboards/list`}
-          >
+          <Folder key={index} variant="link" icon={<FolderOpen />} size="md" href={`/dashboards/list`}>
             {item.workspace}
           </Folder>
         ))}
       </div>
     </>
-  )
+  );
 }
