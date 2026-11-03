@@ -63,6 +63,9 @@ function TeamCard({ team }: { team: TeamItem }) {
           <dd className="truncate font-medium">{team.leadName ?? "—"}</dd>
         </div>
       </dl>
+      <Link href={`/squads/${team.id}/edit`} className="text-muted-foreground hover:text-foreground w-fit text-xs underline">
+        Editar
+      </Link>
     </article>
   );
 }
