@@ -6,6 +6,9 @@ import { PROVIDERS } from "@/lib/db-providers";
 import { getDatabase } from "@/services/api/databases";
 import NewDatabaseForm from "../../new/_components/NewDatabaseForm";
 
+import DangerZone from "@/components/DangerZone";
+import { deleteDatabaseAction } from "@/actions/databases/deleteDatabaseAction";
+
 export default async function EditDatabasePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const res = await getDatabase(id);
@@ -28,6 +31,13 @@ export default async function EditDatabasePage({ params }: { params: Promise<{ i
         <p className="text-muted-foreground mt-1 text-sm">{res.data.name}</p>
       </header>
       <NewDatabaseForm database={{ ...res.data, provider }} />
+      <DangerZone
+        id={res.data.id}
+        action={deleteDatabaseAction}
+        buttonLabel="Excluir base"
+        confirmName={res.data.name}
+        description="O agente deixa de consultar esta base, e as conversas antigas podem continuar citando-a como fonte."
+      />
     </div>
   );
 }

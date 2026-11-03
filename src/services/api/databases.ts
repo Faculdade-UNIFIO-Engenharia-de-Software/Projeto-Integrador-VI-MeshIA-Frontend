@@ -64,7 +64,7 @@ export async function createDatabase(input: NewDatabase): Promise<Result<Databas
     }
     // a senha NÃO é guardada nem devolvida, nem no mock
     const item: DatabaseItem = {
-      id: `d${MOCK_DATABASES.length + 1}`,
+      id: `d${Date.now()}`,
       name: input.name,
       provider: input.provider,
       company: input.company,
@@ -199,6 +199,42 @@ export async function updateDatabase(id: string, input: UpdateDatabase): Promise
       };
     }
     return { ok: true, data: (await res.json()) as DatabaseItem }; // contrato a combinar com o back
+  } catch {
+    return { ok: false, message: "Servidor indisponível. Tente novamente." };
+  }
+}
+
+export async function deleteDatabase(id: string): Promise<Result<null>> {
+  if (process.env.USE_MOCK_API === "true") {
+    await new Promise((r) => setTimeout(r, 400));
+    const index = MOCK_DATABASES.findIndex((d) => d.id === id);
+    if (index === -1) return { ok: false, message: "Base não encontrada." };
+    MOCK_DATABASES.splice(index, 1);
+    delete MOCK_CONNECTIONS[id];
+    return { ok: true, data: null };
+  }
+
+  try {
+    const token = (await cookies()).get("token")?.value;
+    const res = await fetch(`${process.env.API_URL}/databases/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      return {
+        ok: false,
+        message:
+          res.status === 403
+            ? "Você não tem permissão para excluir bases."
+            : res.status === 404
+              ? "Base não encontrada."
+              : res.status === 409
+                ? "Não é possível excluir: a base ainda está em uso."
+                : "Não foi possível excluir a base.",
+      };
+    }
+    return { ok: true, data: null }; // 204 sem corpo
   } catch {
     return { ok: false, message: "Servidor indisponível. Tente novamente." };
   }
