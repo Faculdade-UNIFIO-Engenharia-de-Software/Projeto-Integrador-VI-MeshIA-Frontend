@@ -20,8 +20,10 @@ export type TeamItem = {
   name: string;
   members: number;
   description?: string;
+  leadId?: string | null;
   leadName?: string | null;
 };
+
 export type NewUser = Pick<UserItem, "name" | "email" | "jobTitle" | "department" | "role">;
 
 type Result<T> = { ok: true; data: T } | { ok: false; message: string };
@@ -228,11 +230,11 @@ export async function createTeam(input: NewTeam): Promise<Result<TeamItem>> {
       return { ok: false, message: "Já existe uma equipe com esse nome." };
     }
     const team: TeamItem = {
-      id: `t${MOCK_TEAMS.length + 1}`,
+      id: `t${Date.now()}`,
       name: input.name,
       members: 1, // o líder conta como primeiro membro
       description: input.description,
-      leadName: input.leadName,
+      leadId: input.leadId,
     };
     MOCK_TEAMS.push(team);
     return { ok: true, data: team };
@@ -296,6 +298,99 @@ export async function updateUserProfile(id: string, input: UserProfileUpdate): P
       };
     }
     return { ok: true, data: (await res.json()) as UserItem }; // contrato a combinar com o back
+  } catch {
+    return { ok: false, message: "Servidor indisponível. Tente novamente." };
+  }
+}
+
+export async function deleteTeam(id: string): Promise<Result<null>> {
+  if (USE_MOCK) {
+    await delay(400);
+    const index = MOCK_TEAMS.findIndex((t) => t.id === id);
+    if (index === -1) return { ok: false, message: "Equipe não encontrada." };
+    MOCK_TEAMS.splice(index, 1);
+    return { ok: true, data: null };
+  }
+
+  try {
+    const token = (await cookies()).get("token")?.value;
+    const res = await fetch(`${process.env.API_URL}/teams/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      return {
+        ok: false,
+        message:
+          res.status === 403
+            ? "Você não tem permissão para excluir equipes."
+            : res.status === 404
+              ? "Equipe não encontrada."
+              : res.status === 409
+                ? "Não é possível excluir: a equipe ainda tem vínculos."
+                : "Não foi possível excluir a equipe.",
+      };
+    }
+    return { ok: true, data: null }; // 204 sem corpo
+  } catch {
+    return { ok: false, message: "Servidor indisponível. Tente novamente." };
+  }
+}
+
+export type TeamUpdate = {
+  name: string;
+  description: string;
+  leadId: string;
+  leadName: string;
+};
+
+export async function getTeam(id: string): Promise<Result<TeamItem>> {
+  if (USE_MOCK) {
+    await delay(200);
+    const team = MOCK_TEAMS.find((t) => t.id === id);
+    return team ? { ok: true, data: team } : { ok: false, message: "Equipe não encontrada." };
+  }
+  return apiGet<TeamItem>(`/teams/${id}`);
+}
+
+export async function updateTeam(id: string, input: TeamUpdate): Promise<Result<TeamItem>> {
+  if (USE_MOCK) {
+    await delay(400);
+    const team = MOCK_TEAMS.find((t) => t.id === id);
+    if (!team) return { ok: false, message: "Equipe não encontrada." };
+    if (MOCK_TEAMS.some((t) => t.id !== id && t.name.toLowerCase() === input.name.toLowerCase())) {
+      return { ok: false, message: "Já existe uma equipe com esse nome." };
+    }
+    team.name = input.name;
+    team.description = input.description;
+    team.leadId = input.leadId;
+    team.leadName = input.leadName;
+    return { ok: true, data: team };
+  }
+
+  try {
+    const token = (await cookies()).get("token")?.value;
+    const res = await fetch(`${process.env.API_URL}/teams/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ name: input.name, description: input.description, leadId: input.leadId }),
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      return {
+        ok: false,
+        message:
+          res.status === 403
+            ? "Você não tem permissão para editar equipes."
+            : res.status === 404
+              ? "Equipe não encontrada."
+              : res.status === 409
+                ? "Já existe uma equipe com esse nome."
+                : "Não foi possível salvar a equipe.",
+      };
+    }
+    return { ok: true, data: (await res.json()) as TeamItem }; // contrato a combinar com o back
   } catch {
     return { ok: false, message: "Servidor indisponível. Tente novamente." };
   }
