@@ -1,95 +1,28 @@
-import { Settings, ChartNetwork, BuildingComplex, Grid2X2, BotMessageSquare, Database, Users, History } from "lucide-react";
+// === Icones ===
+import { Settings, ChartNetwork, BuildingComplex } from "lucide-react";
 
 export const sidebarModules = {
   navMain: [
-    // ===== Menu da V1 (segue o Figma) =====
-    { title: "Chat / Consultas", url: "/chats", icon: BotMessageSquare },
-    { title: "Bases de Dados", url: "/data-catalog", icon: Database },
-    { title: "Usuários & Equipes", url: "/users", icon: Users },
-    { title: "Histórico de Análises", url: "/history", icon: History }, // a rota ainda não existe
-    { title: "Configurações", url: "/profile", icon: Settings },
-
-    // ===== Menu antigo: guardado e escondido (fora da V1) =====
     {
       title: "Analytics",
       url: "#",
       icon: ChartNetwork,
       isActive: true,
-      hidden: true,
       items: [
-        {
-          title: "Dashboards",
-          url: "/dashboards",
-          isActive: true,
-        },
-        {
-          title: "ChatIA",
-          url: "/chats",
-          isActive: true,
-        },
-        {
-          title: "Catálogo de Dados",
-          url: "/data-catalog",
-          isActive: true,
-        },
+        { title: "Chat / Consultas", url: "/chats" },
+        { title: "Histórico de Análises", url: "/history" },
+        { title: "Bases de Dados", url: "/data-catalog" },
       ],
     },
     {
-      title: "Engenharia de Dados",
-      url: "#",
-      icon: Grid2X2,
-      isActive: false,
-      hidden: true,
-      items: [
-        {
-          title: "Fontes",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Pipelines",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Jobs",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Linhagem",
-          url: "#",
-          isActive: true,
-        },
-      ],
-    },
-    {
-      title: "Configurações (antigo)",
+      title: "Configurações",
       url: "#",
       icon: Settings,
-      isActive: false,
-      hidden: true,
+      isActive: true,
       items: [
-        {
-          title: "Usuários",
-          url: "/users",
-          isActive: true,
-        },
-        {
-          title: "Times",
-          url: "/squads",
-          isActive: true,
-        },
-        {
-          title: "Agentes e Limites",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Faturamento",
-          url: "/billing",
-          isActive: true,
-        },
+        { title: "Usuários & Equipes", url: "/users" },
+        { title: "Squads", url: "/squads" },
+        { title: "Perfil", url: "/profile" },
       ],
     },
   ],
@@ -105,20 +38,8 @@ export const sidebarUser = {
 
 export const sidebarTeams = {
   teams: [
-    {
-      name: "MeshIA",
-      logo: BuildingComplex,
-      plan: "Premium",
-    },
-    {
-      name: "Webby Internet",
-      logo: BuildingComplex,
-      plan: "Premium",
-    },
-    {
-      name: "Alares Internet",
-      logo: BuildingComplex,
-      plan: "Premium",
-    },
+    { name: "MeshIA", logo: BuildingComplex, plan: "Premium" },
+    { name: "Webby Internet", logo: BuildingComplex, plan: "Premium" },
+    { name: "Alares Internet", logo: BuildingComplex, plan: "Premium" },
   ],
 };
