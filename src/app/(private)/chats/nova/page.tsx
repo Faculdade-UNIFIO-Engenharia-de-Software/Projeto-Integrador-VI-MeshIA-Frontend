@@ -52,7 +52,7 @@ async function AnswerBlock({ question }: { question: string }) {
       <AiAvatar />
       <MessageContent>
         <Bubble variant="muted">
-          <BubbleContent>{text}</BubbleContent>
+          <BubbleContent className="whitespace-pre-line">{text}</BubbleContent>{" "}
         </Bubble>
         {sources.length > 0 && (
           <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-xs">
