@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useId, useSyncExternalStore } from "react";
+import React, { useEffect, useRef, useId, useSyncExternalStore, useCallback } from "react";
 
 export interface GlassSurfaceProps {
   children?: React.ReactNode;
@@ -118,7 +118,7 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
 
   const isDarkMode = useDarkMode();
 
-  const generateDisplacementMap = () => {
+  const generateDisplacementMap = useCallback(() => {
     const rect = containerRef.current?.getBoundingClientRect();
     const actualWidth = rect?.width || 400;
     const actualHeight = rect?.height || 200;
@@ -144,12 +144,13 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     `;
 
     return `data:image/svg+xml,${encodeURIComponent(svgContent)}`;
-  };
+  }, [borderWidth, redGradId, blueGradId, borderRadius, mixBlendMode, brightness, opacity, blur]);
 
-  const updateDisplacementMap = () => {
+  const updateDisplacementMap = useCallback(() => {
     feImageRef.current?.setAttribute("href", generateDisplacementMap());
-  };
+  }, [generateDisplacementMap]);
 
+  // Hook 1: Atualiza atributos SVG e canais de distorção
   useEffect(() => {
     updateDisplacementMap();
     [
@@ -165,24 +166,9 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     });
 
     gaussianBlurRef.current?.setAttribute("stdDeviation", displace.toString());
-  }, [
-    width,
-    height,
-    borderRadius,
-    borderWidth,
-    brightness,
-    opacity,
-    blur,
-    displace,
-    distortionScale,
-    redOffset,
-    greenOffset,
-    blueOffset,
-    xChannel,
-    yChannel,
-    mixBlendMode,
-  ]);
+  }, [updateDisplacementMap, distortionScale, redOffset, greenOffset, blueOffset, xChannel, yChannel, displace]);
 
+  // Hook 2: Observa redimensionamento do container via ResizeObserver
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -195,11 +181,13 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     return () => {
       resizeObserver.disconnect();
     };
-  }, []);
+  }, [updateDisplacementMap]);
 
+  // Hook 3: Atualização quando width/height mudam
   useEffect(() => {
-    setTimeout(updateDisplacementMap, 0);
-  }, [width, height]);
+    const timer = setTimeout(updateDisplacementMap, 0);
+    return () => clearTimeout(timer);
+  }, [width, height, updateDisplacementMap]);
 
   const supportsBackdropFilter = () => {
     if (typeof window === "undefined") return false;
