@@ -21,7 +21,7 @@ export function UserAccessForm({ id, role, status }: { id: string; role: Role; s
         {ROLES.map((r) => (
           <label
             key={r.value}
-            className="flex cursor-pointer items-start gap-3 rounded-md border p-3 has-[:checked]:border-primary has-[:checked]:bg-accent"
+            className="flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-[border-color,background-color] duration-200 ease-soft hover:bg-accent/40 has-[:checked]:border-primary has-[:checked]:bg-primary/10"
           >
             <input type="radio" name="role" value={r.value} defaultChecked={r.value === role} className="mt-1" />
             <span>

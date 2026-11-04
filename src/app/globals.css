@@ -5,38 +5,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap");
 
-
-
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
-@layer components{
+@layer components {
   .bg-grid {
-      background-color: #FFF;
+    background-color: #fff;
 
-      background-image:
-        linear-gradient(
-          to right,
-          rgba(49,56,96,0.09) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          to bottom,
-          rgba(49, 56, 96, 0.09) 1px,
-          transparent 1px
-        );
+    background-image:
+      linear-gradient(to right, rgba(49, 56, 96, 0.09) 1px, transparent 1px), linear-gradient(to bottom, rgba(49, 56, 96, 0.09) 1px, transparent 1px);
 
-      background-size: 26px 26px;
-    }
+    background-size: 26px 26px;
+  }
 
-  .container{
+  .container {
     display: flex;
     flex-direction: column;
     /*height: 100%;*/
-    padding:8px 16px 8px 16px;
+    padding: 8px 16px 8px 16px;
   }
 }
 
@@ -94,33 +83,29 @@
 
   code,
   pre {
-    font-family: var(--font-jetbrains)
+    font-family: var(--font-jetbrains);
   }
 
-  label{
-    font-family:var(--font-inter);
+  label {
+    font-family: var(--font-inter);
   }
   * {
     @apply border-border outline-ring/50;
-
   }
   html {
     @apply font-sans;
-
   }
 }
 
 @theme inline {
-
   /*============= Fontes ============*/
   --font-geist-pixel: "Geist Pixel", sans-serif;
-    --font-inter: "Inter", sans-serif;
-    --font-jetbrains: "JetBrains Mono", monospace;
-    --font-nunito: "Nunito", sans-serif;
-    --font-cutive: "Cutive Mono", monospace;
-    --font-smooch: "Smooch Sans", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-jetbrains: "JetBrains Mono", monospace;
+  --font-nunito: "Nunito", sans-serif;
+  --font-cutive: "Cutive Mono", monospace;
+  --font-smooch: "Smooch Sans", sans-serif;
 
-  
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -187,7 +172,7 @@
   --chart-3: oklch(0.546 0.245 262.881);
   --chart-4: oklch(0.488 0.243 264.376);
   --chart-5: oklch(0.424 0.199 265.638);
-  --radius: 0.45rem;
+  --radius: 0.75rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.141 0.005 285.823);
   --sidebar-primary: oklch(0.8172 0.1449 171.21);
@@ -224,10 +209,49 @@
   --chart-5: oklch(0.424 0.199 265.638);
   --sidebar: oklch(0.21 0.006 285.885);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary:oklch(0.7597 0.1497 157.59);
+  --sidebar-primary: oklch(0.7597 0.1497 157.59);
   --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
   --sidebar-accent: oklch(0.274 0.006 286.033);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
+}
+
+@theme {
+  --shadow-soft: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px -10px rgb(15 23 42 / 0.1);
+  --shadow-float: 0 2px 4px rgb(15 23 42 / 0.04), 0 16px 40px -14px rgb(15 23 42 / 0.18);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility surface {
+  border-radius: var(--radius-2xl);
+  background-color: var(--color-card);
+  color: var(--color-card-foreground);
+  box-shadow:
+    var(--shadow-soft),
+    0 0 0 1px color-mix(in oklab, var(--color-foreground) 6%, transparent);
+}
+
+@utility lift {
+  transition:
+    box-shadow 300ms var(--ease-soft),
+    transform 300ms var(--ease-soft),
+    background-color 300ms var(--ease-soft);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      var(--shadow-float),
+      0 0 0 1px color-mix(in oklab, var(--color-foreground) 6%, transparent);
+  }
+}
+
+@layer utilities {
+  .surface {
+    @apply rounded-2xl bg-card border border-foreground/[0.06] shadow-soft ring-1 ring-foreground/[0.04];
+  }
+
+  .lift {
+    @apply transition-[box-shadow,transform,background-color] duration-300 ease-soft hover:-translate-y-0.5 hover:shadow-float;
+  }
 }
