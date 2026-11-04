@@ -9,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { getMe } from "@/services/api/me";
 import { listDatabases } from "@/services/api/databases";
 
-// Edite aqui para bater com o Figma (título, descrição, pergunta enviada).
+export const dynamic = "force-dynamic";
+
 const QUICK_ACTIONS = [
   { icon: TrendingUp, title: "Resumo de vendas", description: "Visão geral do período", question: "Faça um resumo das vendas do último mês" },
   { icon: Users, title: "Análise de clientes", description: "Perfil e comportamento", question: "Quais são os perfis de clientes mais frequentes?" },
