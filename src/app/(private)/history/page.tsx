@@ -29,7 +29,7 @@ export default async function HistoryPage({ searchParams }: { searchParams: Prom
         <Separator />
       </div>
 
-      <Form action="/history" className="my-6 max-w-md">
+      <Form action="/history" className="my-8 max-w-md">
         <InputGroup>
           <InputGroupAddon align="inline-start">
             <Search />
@@ -79,13 +79,13 @@ async function ConversationList({ query }: { query: string }) {
   }
 
   return (
-    <ul className="flex flex-col gap-2">
+    <ul className="flex flex-col gap-3">
       {result.data.map((c) => (
         <li key={c.id}>
           {/* levar para /chats/[id] quando o back guardar as respostas */}
           <Link
             href={`/chats/nova?q=${encodeURIComponent(c.preview)}`}
-            className="flex flex-col gap-1 rounded-lg border bg-card p-4 transition-colors hover:bg-accent"
+            className="flex flex-col gap-1.5 rounded-2xl bg-card p-5 shadow-soft ring-1 ring-foreground/[0.06] transition-[box-shadow,transform,background-color] duration-300 ease-soft hover:-translate-y-0.5 hover:shadow-float"
           >
             <div className="flex items-start justify-between gap-4">
               <span className="font-medium">{c.title}</span>
@@ -106,9 +106,9 @@ async function ConversationList({ query }: { query: string }) {
 
 function ListSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       {Array.from({ length: 4 }).map((_, i) => (
-        <Skeleton key={i} className="h-24 w-full rounded-lg" />
+        <Skeleton key={i} className="h-24 w-full rounded-2xl" />
       ))}
     </div>
   );

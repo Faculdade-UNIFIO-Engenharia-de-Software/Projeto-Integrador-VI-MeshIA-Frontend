@@ -36,8 +36,8 @@ export default async function Chats() {
   const bases = databases.ok ? databases.data : [];
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 py-6">
-      <header className="flex flex-col gap-2 text-center">
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-10 py-10">
+      <header className="flex flex-col gap-3 text-center">
         <h1 className="flex items-center justify-center gap-2 text-2xl font-semibold">
           <Sparkles className="size-6" />
           {firstName ? `Olá, ${firstName}!` : "Olá!"}
@@ -49,7 +49,7 @@ export default async function Chats() {
         </p>
       </header>
 
-      <Form action="/chats/nova" className="flex gap-2">
+      <Form action="/chats/nova" className="flex gap-3">
         <Input
           name="q"
           required
@@ -57,29 +57,38 @@ export default async function Chats() {
           maxLength={500}
           placeholder="Faça uma pergunta em linguagem natural..."
           aria-label="Pergunta"
-          className="h-11"
+          className="h-12 rounded-2xl px-5 shadow-soft"
         />
-        <Button type="submit" className="h-11 px-5">
+        <Button type="submit" className="h-12 rounded-2xl px-7">
           Analisar
         </Button>
       </Form>
 
-      <section aria-label="Ações rápidas" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <section aria-label="Ações rápidas" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {QUICK_ACTIONS.map(({ icon: Icon, title, description, question }) => (
-          <Link key={title} href={chatHref(question)} className="hover:bg-accent flex flex-col gap-1 rounded-xl border p-4 transition-colors">
-            <Icon className="text-muted-foreground size-5" />
+          <Link
+            key={title}
+            href={chatHref(question)}
+            className="flex flex-col gap-1.5 rounded-2xl bg-card p-5 shadow-soft ring-1 ring-foreground/[0.06] transition-[box-shadow,transform,background-color] duration-300 ease-soft hover:-translate-y-0.5 hover:bg-accent/50 hover:shadow-float"
+          >
+            <span className="bg-primary/15 mb-2 flex size-10 items-center justify-center rounded-xl">
+              <Icon className="size-5" />
+            </span>
             <span className="font-medium">{title}</span>
             <span className="text-muted-foreground text-sm">{description}</span>
           </Link>
         ))}
       </section>
 
-      <section aria-label="Exemplos de perguntas" className="flex flex-col gap-2">
+      <section aria-label="Exemplos de perguntas" className="flex flex-col gap-3">
         <h2 className="text-muted-foreground text-sm font-medium">Exemplos de perguntas</h2>
-        <ul className="flex flex-wrap gap-2">
+        <ul className="flex flex-wrap gap-2.5">
           {EXAMPLES.map((example) => (
             <li key={example}>
-              <Link href={chatHref(example)} className="hover:bg-accent rounded-full border px-3 py-1.5 text-sm transition-colors">
+              <Link
+                href={chatHref(example)}
+                className="bg-secondary/70 hover:bg-accent hover:shadow-soft rounded-full px-4 py-2 text-sm ring-1 ring-foreground/[0.06] transition-[background-color,box-shadow] duration-200 ease-soft"
+              >
                 {example}
               </Link>
             </li>
