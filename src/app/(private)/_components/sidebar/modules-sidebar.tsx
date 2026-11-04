@@ -39,7 +39,7 @@ export const sidebarUser = {
 export const sidebarTeams = {
   teams: [
     { name: "MeshIA", logo: BuildingComplex, plan: "Premium" },
-    { name: "Webby Internet", logo: BuildingComplex, plan: "Premium" },
-    { name: "Alares Internet", logo: BuildingComplex, plan: "Premium" },
+    { name: "Empresa 2", logo: BuildingComplex, plan: "Premium" },
+    { name: "Empresa 3", logo: BuildingComplex, plan: "Premium" },
   ],
 };
