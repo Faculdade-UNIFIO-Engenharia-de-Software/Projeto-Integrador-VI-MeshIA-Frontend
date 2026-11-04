@@ -99,11 +99,35 @@ const MOCK_USERS: UserItem[] = [
   },
 ];
 
-const MOCK_TEAMS: TeamItem[] = [
-  { id: "t1", name: "Equipe 1 - BI & Analytics", members: 6 },
-  { id: "t2", name: "Equipe 2 - Financeiro & FP&A", members: 4 },
-  { id: "t3", name: "Equipe 3 - Operações & Supply", members: 8 },
-  { id: "t4", name: "Equipe 4 - Diretoria Executiva", members: 3 },
+export const MOCK_TEAMS: TeamItem[] = [
+  {
+    id: "team-eng",
+    name: "Engenharia de Dados",
+    description: "Desenvolvimento de pipelines, modelagem de dados e governança de integrações.",
+    members: 8,
+    leadName: "Herbert Santos",
+  },
+  {
+    id: "team-ai",
+    name: "Inteligência Artificial",
+    description: "Pesquisa, fine-tuning e orquestração de LLMs e agentes de análise preditiva.",
+    members: 5,
+    leadName: "Ana Beatriz",
+  },
+  {
+    id: "team-fin",
+    name: "Indicadores Financeiros",
+    description: "Consolidação contábil, previsibilidade de receita e auditoria de métricas.",
+    members: 4,
+    leadName: "Carlos Eduardo",
+  },
+  {
+    id: "team-ops",
+    name: "Operações & Logística",
+    description: "Monitoramento de estoque, giro de mercadorias e eficiência de distribuição.",
+    members: 6,
+    leadName: "Mariana Souza",
+  },
 ];
 
 async function apiGet<T>(path: string, params?: Record<string, string>): Promise<Result<T>> {

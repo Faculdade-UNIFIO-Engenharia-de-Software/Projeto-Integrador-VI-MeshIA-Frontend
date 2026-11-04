@@ -3,6 +3,7 @@ import { Users } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { listTeams, type TeamItem } from "@/services/api/users";
 
 export default async function Squads() {
@@ -48,7 +49,7 @@ export default async function Squads() {
 
 function TeamCard({ team }: { team: TeamItem }) {
   return (
-    <article className="bg-card flex h-full flex-col gap-3 rounded-lg border p-4">
+    <article className="surface lift flex h-full flex-col gap-3 p-5">
       <div className="min-w-0">
         <h3 className="truncate text-base font-semibold">{team.name}</h3>
         <p className="text-muted-foreground line-clamp-2 text-sm">{team.description || "Sem descrição."}</p>
@@ -63,7 +64,7 @@ function TeamCard({ team }: { team: TeamItem }) {
           <dd className="truncate font-medium">{team.leadName ?? "—"}</dd>
         </div>
       </dl>
-      <Link href={`/squads/${team.id}/edit`} className="text-muted-foreground hover:text-foreground w-fit text-xs underline">
+      <Link href={`/squads/${team.id}/edit`} className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "w-fit")}>
         Editar
       </Link>
     </article>

@@ -55,7 +55,7 @@ export default async function UsersPage({ searchParams }: { searchParams: Search
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[22rem_1fr]">
         <div className="flex min-w-0 flex-col gap-6">
-          <section aria-labelledby="collab-title" className="rounded-lg border bg-card p-4">
+          <section aria-labelledby="collab-title" className="surface p-5">
             <div className="mb-3 flex items-center justify-between">
               <h5 id="collab-title" className="font-semibold">
                 Colaboradores
@@ -90,7 +90,7 @@ export default async function UsersPage({ searchParams }: { searchParams: Search
             )}
           </section>
 
-          <section aria-labelledby="teams-title" className="rounded-lg border bg-card p-4">
+          <section aria-labelledby="teams-title" className="surface p-5">
             <div className="mb-3 flex items-center justify-between">
               <h5 id="teams-title" className="font-semibold">
                 Equipes & Squads
@@ -106,7 +106,7 @@ export default async function UsersPage({ searchParams }: { searchParams: Search
             ) : (
               <ul className="flex flex-col gap-1">
                 {teamsRes.data.map((t) => (
-                  <li key={t.id} className="flex items-center justify-between gap-2 rounded-md p-2 text-sm">
+                  <li key={t.id} className="flex items-center justify-between gap-2 rounded-xl p-2.5 text-sm">
                     <span className="truncate">{t.name}</span>
                     <span className="shrink-0 text-xs text-muted-foreground">{t.members} membros</span>
                   </li>
@@ -137,7 +137,7 @@ function UserListItem({ user, href, selected }: { user: UserItem; href: string; 
     <Link
       href={href}
       aria-current={selected ? "true" : undefined}
-      className={cn("flex items-center gap-3 rounded-md p-2 transition-colors hover:bg-accent", selected && "bg-accent")}
+      className={cn("flex items-center gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent", selected && "bg-accent")}
     >
       <Avatar>
         <AvatarFallback>{initials(user.name)}</AvatarFallback>
@@ -157,7 +157,7 @@ function UserDetail({ user }: { user: UserItem }) {
   const role = findRole(user.role);
 
   return (
-    <section className="rounded-lg border bg-card p-6">
+    <section className="surface p-6">
       <div className="flex flex-wrap items-center gap-4">
         <Avatar>
           <AvatarFallback>{initials(user.name)}</AvatarFallback>
@@ -171,7 +171,7 @@ function UserDetail({ user }: { user: UserItem }) {
           <p className="truncate text-sm text-muted-foreground">{user.email}</p>
         </div>
 
-        <Link href={`/users/${user.id}/edit`} className="text-muted-foreground hover:text-foreground text-xs underline">
+        <Link href={`/users/${user.id}/edit`} className={buttonVariants({ variant: "secondary", size: "sm" })}>
           Editar dados
         </Link>
       </div>

@@ -22,17 +22,14 @@ export default async function RecentConversations() {
       </div>
 
       {!result.ok ? (
-        <p className="text-muted-foreground rounded-xl border border-dashed p-4 text-sm">{result.message}</p>
+        <p className="text-muted-foreground rounded-2xl border border-dashed p-4 text-sm">{result.message}</p>
       ) : result.data.length === 0 ? (
-        <p className="text-muted-foreground rounded-xl border border-dashed p-4 text-sm">Você ainda não fez nenhuma consulta.</p>
+        <p className="text-muted-foreground rounded-2xl border border-dashed p-4 text-sm">Você ainda não fez nenhuma consulta.</p>
       ) : (
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-3">
           {result.data.slice(0, LIMIT).map((c) => (
             <li key={c.id}>
-              <Link
-                href={`/chats/nova?q=${encodeURIComponent(c.preview)}`}
-                className="hover:bg-accent flex flex-col gap-0.5 rounded-xl border p-3 transition-colors"
-              >
+              <Link href={`/chats/nova?q=${encodeURIComponent(c.preview)}`} className="surface lift flex flex-col gap-0.5 p-4">
                 <span className="flex items-baseline justify-between gap-3">
                   <span className="truncate font-medium">{c.title}</span>
                   <span className="text-muted-foreground shrink-0 text-xs">{formatDateTime(c.updatedAt)}</span>

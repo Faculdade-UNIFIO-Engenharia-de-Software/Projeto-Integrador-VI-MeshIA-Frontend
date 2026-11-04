@@ -31,7 +31,7 @@ export default async function ProfilePage() {
           <ProfileCard profile={res.data} />
         )}
 
-        <section aria-labelledby="appearance-title" className="rounded-lg border bg-card p-6">
+        <section aria-labelledby="appearance-title" className="surface p-6">
           <h5 id="appearance-title" className="mb-1 font-semibold">
             Aparência
           </h5>
@@ -47,7 +47,7 @@ function ProfileCard({ profile }: { profile: Profile }) {
   const role = findRole(profile.role);
 
   return (
-    <section aria-label="Dados do usuário" className="rounded-lg border bg-card p-6">
+    <section aria-label="Dados do usuário" className="surface p-6">
       <div className="flex flex-wrap items-center gap-4">
         <Avatar>
           <AvatarFallback>{initials(profile.name)}</AvatarFallback>

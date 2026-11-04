@@ -80,14 +80,14 @@ export default async function Chats() {
         ))}
       </section>
 
-      <section aria-label="Exemplos de perguntas" className="flex flex-col gap-3">
+      <section aria-label="Exemplos de perguntas" className="flex flex-col gap-3.5 pt-2">
         <h2 className="text-muted-foreground text-sm font-medium">Exemplos de perguntas</h2>
-        <ul className="flex flex-wrap gap-2.5">
+        <ul className="flex flex-wrap gap-3">
           {EXAMPLES.map((example) => (
             <li key={example}>
               <Link
                 href={chatHref(example)}
-                className="bg-secondary/70 hover:bg-accent hover:shadow-soft rounded-full px-4 py-2 text-sm ring-1 ring-foreground/[0.06] transition-[background-color,box-shadow] duration-200 ease-soft"
+                className="bg-secondary/70 hover:bg-accent hover:shadow-soft inline-flex items-center rounded-full px-4.5 py-2.5 text-sm ring-1 ring-foreground/[0.06] transition-[background-color,box-shadow,transform] duration-200 ease-soft hover:-translate-y-0.5"
               >
                 {example}
               </Link>
@@ -95,6 +95,7 @@ export default async function Chats() {
           ))}
         </ul>
       </section>
+
       <Suspense fallback={<p className="text-muted-foreground text-sm">Carregando consultas recentes...</p>}>
         <RecentConversations />
       </Suspense>

@@ -1,41 +1,38 @@
 "use client";
+
 import { useActionState, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 import { loginAction, type LoginState } from "@/actions/auth/loginAction";
-
-// ========= shadcn imports ============
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
-
-// ========= lucide icons ============
-import { Eye, EyeOffIcon } from "lucide-react";
 
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [state, formAction, pending] = useActionState<LoginState, FormData>(loginAction, {});
 
   return (
-    <form action={formAction} noValidate className="flex flex-col my-6 h-full pb-2 gap-4">
-      <div className="space-y-2 py-2">
-        <Label htmlFor="email">E-mail:</Label>
+    <form action={formAction} noValidate className="flex flex-col gap-3 my-2">
+      <div className="space-y-1.5">
+        <Label htmlFor="email">E-mail</Label>
         <Input
           id="email"
           name="email"
           type="email"
           autoComplete="email"
           placeholder="Digite seu e-mail"
-          className="py-5"
           defaultValue={state.values?.email}
           aria-invalid={!!state.fieldErrors?.email}
+          className="h-10 rounded-xl bg-secondary/60 transition-[color,background-color,border-color,box-shadow] duration-200 ease-soft focus-visible:ring-4 focus-visible:ring-ring/30"
         />
-        <div className="h-5">{state.fieldErrors?.email && <p className="text-xs text-destructive">{state.fieldErrors.email}</p>}</div>
+        {state.fieldErrors?.email && <p className="text-xs text-destructive">{state.fieldErrors.email}</p>}
       </div>
 
-      <div className="space-y-2 mb-2 py-2">
-        <Label htmlFor="password">Senha:</Label>
-        <InputGroup className="py-5">
+      <div className="space-y-1.5">
+        <Label htmlFor="password">Senha</Label>
+        <InputGroup>
           <InputGroupInput
             id="password"
             name="password"
@@ -45,18 +42,18 @@ export default function SignInPage() {
             aria-invalid={!!state.fieldErrors?.password}
           />
           <InputGroupAddon align="inline-end">
-            <Button
-              className="border-none"
-              variant="outline"
+            <InputGroupButton
+              size="icon-xs"
+              variant="ghost"
               type="button"
               aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
               onClick={() => setShowPassword((prev) => !prev)}
             >
-              {showPassword ? <Eye /> : <EyeOffIcon />}
-            </Button>
+              {showPassword ? <Eye className="size-4" /> : <EyeOff className="size-4" />}
+            </InputGroupButton>
           </InputGroupAddon>
         </InputGroup>
-        <div className="h-5">{state.fieldErrors?.password && <p className="text-xs text-destructive">{state.fieldErrors.password}</p>}</div>
+        {state.fieldErrors?.password && <p className="text-xs text-destructive">{state.fieldErrors.password}</p>}
       </div>
 
       {state.formError && (
@@ -65,7 +62,7 @@ export default function SignInPage() {
         </p>
       )}
 
-      <Button type="submit" disabled={pending} className="w-full py-4.5 text-white">
+      <Button type="submit" disabled={pending} className="mt-2 h-10 w-full rounded-xl text-white">
         {pending ? "Entrando..." : "Entrar"}
       </Button>
     </form>

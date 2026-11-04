@@ -28,15 +28,9 @@ export default async function DataCatalogPage() {
             <Database />
             Bases de Dados
           </h4>
-          <div className="flex flex-wrap items-start justify-between gap-2">
-            <h4 className="flex gap-2">
-              <Database />
-              Bases de Dados
-            </h4>
-            <Link href="/data-catalog/new" className={buttonVariants()}>
-              Cadastrar nova base
-            </Link>
-          </div>
+          <Link href="/data-catalog/new" className={buttonVariants()}>
+            Cadastrar nova base
+          </Link>
         </div>
         <p className="text-muted-foreground mt-1 mb-6">Fontes de dados que o assistente pode consultar.</p>
         <Separator />
@@ -74,7 +68,7 @@ function DatabaseCard({ database }: { database: DatabaseItem }) {
   const status = STATUS[database.status];
 
   return (
-    <article className="flex h-full flex-col gap-4 rounded-lg border bg-card p-4">
+    <article className="surface lift flex h-full flex-col gap-4 p-5">
       <div className="flex items-start justify-between gap-2">
         <span className="text-xs text-muted-foreground">{database.provider}</span>
         {database.latencyMs !== null && <Badge variant="outline">{database.latencyMs} ms</Badge>}
@@ -98,7 +92,7 @@ function DatabaseCard({ database }: { database: DatabaseItem }) {
           <dd className="font-medium">{database.tables} mapeadas</dd>
         </div>
       </dl>
-      <Link href={`/data-catalog/${database.id}/edit`} className="text-muted-foreground hover:text-foreground w-fit text-xs underline">
+      <Link href={`/data-catalog/${database.id}/edit`} className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "w-fit")}>
         Editar
       </Link>
     </article>
